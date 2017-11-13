@@ -1,0 +1,16 @@
+<% layout('layout') -%>
+    <div id="logueo">
+        <form class="form-signin">
+            <h4 class="form-signin-heading">Ingreso GastosDM</h4>
+            <label for="inputEmail" class="sr-only">Usuario:</label>
+            <input type="text" id="inputEmail" class="form-control" placeholder="Usuario" required="" autofocus="" v-model="usuario">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" v-model="password">
+
+            <button class="btn btn-sm btn-primary" v-on:click="login">Ingresar</button>
+        </form>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <script src="../static/js/logueo.js"></script>

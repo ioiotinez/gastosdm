@@ -1,0 +1,67 @@
+<% layout('layout') -%>
+
+    <div class="container" id="presupuestos">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Nuevo presupuesto</h3>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div class="form-group">
+                            <label for="txtDescripcion">Descripcion:</label>
+                            <input id="txtDescripcion" class="form-control" placeholder="Descripcion" v-model="descripcion">
+                        </div>
+                        <div class="form-group">
+                            <label for="dtpFechaDesde">Fecha desde:</label>
+                            <input id="dtpFechaDesde" type="date" class="form-control" placeholder="Fecha" v-model="fechadesde">
+                        </div>
+                        <div class="form-group">
+                            <label for="dtpFechHasta">Fecha hasta:</label>
+                            <input id="dtpFechaHasta" type="date" class="form-control" placeholder="Fecha" v-model="fechahasta">
+                        </div>
+                        <br>
+                        <h4>Presupuestos por categoría:</h4>
+                        <form class="form-inline">
+                            <div class="form-group">
+                            <label for="cboCategoria">Categoria:</label>
+                            <select id="cboCategoria" class="form-control" v-model="categoria.id">
+                                <option disabled value="">--Seleccionar--</option>
+                                <option v-for="categoria in categorias" value="{{categoria.id}}" >{{categoria.nombre}}</option>
+                            </select>
+                        </div>
+                            <div class="form-group">
+                                <label for="txtMontoPresupuesto">Presupuesto:</label>
+                                <input type="number" class="form-control" id="txtMontoPresupuesto" v-model="monto">
+                            </div>
+                            
+                            <button type="button" class="btn btn-default" v-on:click="addPresupuestoCategoria()">Agregar</button>
+                        </form>
+                        <br />
+                        <table class="table" v-if="categoriasPresupuestos.length > 0">
+                            <thead>
+                                <th>Categoria</th>
+                                <th>Presupuesto</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                            <tr v-for="presupuesto in categoriasPresupuestos">
+                                <td>{{presupuesto.categoria.nombre}}</td>
+                                <td>{{presupuesto.monto}}</td>
+                                <td><button type="button" class="btn btn-xs btn-danger" v-on:click="quitarPresupuesto($index)">X</button></td>
+                            </tr>
+                            
+                            </tbody>
+                        </table>
+                        <br />
+                        <button v-if="categoriasPresupuestos.length > 0" class="btn btn-primary" v-on:click="addPresupuesto">Crear presupuesto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <script src="../static/js/presupuesto.js"></script>

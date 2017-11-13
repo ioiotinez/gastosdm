@@ -1,0 +1,78 @@
+<% layout('layout') -%>
+
+    <div class="container" id="verpresupuestos">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Presupuestos</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <select id="cboPresupuestos" class="form-control" v-model="presupuestoSeleccion.id">
+                                <option disabled value="">--Seleccionar--</option>
+                                <option v-for="pres in presupuestos" value="{{pres.id}}" >{{pres.descripcion}}</option>
+                            </select>
+                    </div>
+                    <button class="btn btn-primary" v-on:click="verPresupuesto">Ver</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div v-if="presupuestoSeleccion.totalPresupuestado > 0" class="col-sm-12">
+            <label><strong>Total presupuestado: </strong>{{presupuestoSeleccion.totalPresupuestado}}</label>
+        </div>
+        <div v-if="presupuestoSeleccion.totalGastado > 0" class="col-sm-12">
+            <label><strong>Total gastado: </strong>{{presupuestoSeleccion.totalGastado}}</label>
+        </div>
+        <br />
+        <hr>
+        <div class="col-sm-12" v-for="categoria in presupuestoSeleccion.categoriasPresupuesto">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading"> {{categoria.descripcioncategoria}} </h4>
+                    <h5 class="list-group-item-heading"><i class="glyphicon glyphicon-usd"></i> Presupuestado: {{ categoria.presupuestado }}</h4>
+                        <h5 class="list-group-item-heading"><i class="glyphicon glyphicon-usd"></i> Total gastado: {{ categoria.totalgastado }}</h4>
+                            <div class="progress">
+                                <div class="progress-bar {{categoria.bar}}" role="progressbar" aria-valuenow="{{categoria.porcentaje}}" aria-valuemin="0"
+                                    aria-valuemax="100" style="width:{{categoria.porcentaje}}%">
+                                    {{categoria.porcentaje}}% Completado
+                                </div>
+                            </div>
+                            <button type="button" v-on:click="verGastos($index)" class="btn btn-link" data-toggle="modal" data-target="#myModal">Ver gastos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Gastos - {{titulogastos}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-12" v-for="gasto in gastos">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-usd"></i> {{ gasto.monto }}</h4>
+                                    <h5 class="list-group-item-heading"> {{gasto.descripcion}} </h5>
+                                    <h5><i class="glyphicon glyphicon-calendar" v-if="gasto.fecha"></i> {{ gasto.fecha.substring(0,10)}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.min.js"></script>
+    <script src="../static/js/verpresupuesto.js"></script>

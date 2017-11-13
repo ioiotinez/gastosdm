@@ -1,0 +1,31 @@
+{
+  "name": "gastapp",
+  "version": "1.0.0",
+  "description": "Registro de gastos",
+  "main": "server.js",
+  "author": "Diego Martinez",
+  "license": "",
+  "engines": {
+    "node": "7.10.0",
+    "npm": "4.2.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "bootstrap": "^3.3.6",
+    "ejs": "^2.3.4",
+    "ejs-locals": "^1.0.2",
+    "express": "^4.13.3",
+    "express-session": "^1.15.5",
+    "morgan": "^1.6.1",
+    "nodemon": "^1.11.0",
+    "pg-promise": "^6.3.6",
+    "vue": "^1.0.10",
+    "vue-resource": "^0.1.17"
+  },
+  "devDependencies": {
+    "body-parser": "^1.14.1",
+    "errorhandler": "^1.4.2",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1"
+  }
+}
